@@ -29,9 +29,6 @@ int main() {
     cout << "Stack A length: " << stackA.getLength();
     cout << "Stack B length: " << stackB.getLength();
 
-    // display the stack
-    cout << stackB;
-
     // try pushing to stack B
     // should display error
     try {
@@ -50,9 +47,6 @@ int main() {
     // check stack B's length
     cout << "Stack B length: " << stackB.getLength();
 
-    // display the stack
-    cout << stackB;
-
     // clear out stack B
     stackB.clear();
 
@@ -66,9 +60,6 @@ int main() {
 
     // create an empty stack
     ArrayStack<int> stackC;
-
-    // display the stack
-    cout << stackC;
 
     // try popping from stack C
     // should display error
@@ -96,27 +87,7 @@ int main() {
     cout << "Stack A length: " << stackA.getLength();
     cout << "Stack C length: " << stackC.getLength();
 
-    // rotate stack C
-    testRotate(&stackC);
-
     // terminate
     return 0;
 }
 
-template <typename T>
-void testRotate(ArrayStack<T>* stk) {
-    cout << "Stack C before rotation:" << *stk;
-
-    for (int i = 0; i < stk->getLength() / 2; i++) {
-        stk->rotate(Stack<T>::RIGHT);
-    }
-
-    cout << "Stack C after right rotating half the elements:" << *stk;
-
-    for (int i = 0; i < stk->getLength() / 2; i++) {
-        stk->rotate(Stack<T>::LEFT);
-    }
-
-    cout << "Stack C after the same number of left rotations "
-         << "(should match beginning):" << *stk;
-}
