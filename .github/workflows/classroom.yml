@@ -1,0 +1,52 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: compile
+      id: compile
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: compile
+        setup-command: ''
+        command: g++ -std=c++17 -Wall -Wextra -O2 -o lab09 lab09-main.cpp
+        timeout: 10
+        max-score: 10
+    - name: run
+      id: run
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: run
+        setup-command: ''
+        command: "./lab09"
+        input: ''
+        expected-output: "0 1 2 3 4 5 6 7 8 9 Stack A is full! Stack A length: 10Stack
+          B length: 10top\t9\n\t8\n\t7\n\t6\n\t5\n\t4\n\t3\n\t2\n\t1\n\t0\npush: error,
+          stack is full, avoiding overflowPopping 9 from stack BPopping 8 from stack
+          BPopping 7 from stack BPopping 6 from stack BPopping 5 from stack BStack
+          B length: 5top\t4\n\t3\n\t2\n\t1\n\t0\nStack B is now empty after being
+          clearedStack is empty, no elements to display.\npop: error, stack is empty,
+          avoiding underflowpeek: error, stack is empty, cannot access the topStack
+          A length: 10Stack C length: 10Stack C before rotation:top9\n\t8\n\t7\n\t6\n\t5\n\t4\n\t3\n\t2\n\t1\n\t0\nStack
+          C after right rotating half the elements:top\t4\n\t3\n\t2\n\t1\n\t0\n\t9\n\t8\n\t7\n\t6\n\t5\nStack
+          C after the same number of left rotations (should match beginning):top\t9\n\t8\n\t7\n\t6\n\t5\n\t4\n\t3\n\t2\n\t1\n\t0"
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        COMPILE_RESULTS: "${{steps.compile.outputs.result}}"
+        RUN_RESULTS: "${{steps.run.outputs.result}}"
+      with:
+        runners: compile,run
