@@ -1,0 +1,26 @@
+# Lab 9
+
+## Directions
+
+You will be implementing the Stack ADT as an array-based class. The `Stack` abstract class is already given to you, along with the header file for the `ArrayStack` class, and a skeleton of its implementation file.
+
+You are also in charge of writing your own driver program to test your `ArrayStack` class. Be thorough with your testing by checking all the operations in different scenarios and with various data types.
+
+## Notes
+
+- If you need to access the `length` attribute in your `ArrayStack` class, you need to write it as `this->length`
+- The `buffer` attribute is meant to be a fixed-size, dynamic array
+- The `<<` stream insertion operator has been overloaded for the `ArrayStack` class, meaning you can use `cout` on your `ArrayStack` object to print out the elements inside in top-to-bottom order
+- There are a number of operations that need to consider if it's invalid for it to be called: in those scenarios, make sure to `throw` a `string` exception explaining the error, like this
+    ```C++
+    throw string("message goes here");
+    ```
+- To access the enumerator values of the `Direction` enumeration from within the `ArrayStack` class, you need to scope, like this:
+    ```C++
+    Stack<T>::RIGHT
+    ```
+- Similarly, if you are trying to access `Direction` values outside of the class completely, you can only do so within a function template so that the above syntax works. This means you can't test the `rotate` method directly in the `main` function, you have to create a separate function template for that. For example:
+    ```C++
+    template <typename T>
+    void testRotate(ArrayStack<T>&);
+    ```
