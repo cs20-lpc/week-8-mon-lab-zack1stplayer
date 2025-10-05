@@ -1,4 +1,4 @@
-# Lab 9
+# Week 8 Mon Lab
 
 ## Directions
 
@@ -25,4 +25,5 @@ You are also in charge of writing your own driver program to test your `ArraySta
     template <typename T>
     void testRotate(ArrayStack<T>&);
     ```
+
 
