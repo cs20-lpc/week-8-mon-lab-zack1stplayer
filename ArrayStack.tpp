@@ -75,14 +75,15 @@ void ArrayStack<T>::rotate(typename Stack<T>::Direction dir) {
 template <typename T>
 ostream& operator<<(ostream& outStream, const ArrayStack<T>& myObj) {
     if (myObj.isEmpty()) {
-        outStream << "Stack is empty, no elements to display.";
+        outStream << "Stack is empty, no elements to display.\n";
     }
     else {
         for (int i = myObj.length - 1; i >= 0; i--) {
-            outStream << (i == myObj.length - 1 ? "top" : "")
-                      << myObj.buffer[i];
+            outStream << (i == myObj.length - 1 ? "top\t" : "\t")
+                      << myObj.buffer[i] << endl;
         }
     }
 
     return outStream;
 }
+
