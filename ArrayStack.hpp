@@ -17,6 +17,9 @@ class ArrayStack : public Stack<T> {
         // copy the state of the argument stack to `this`
         void copy(const ArrayStack<T>&);
 
+        void rotateLeft();
+        void rotateRight();
+
     public:
         // constructor with the maximum size as the argument
         ArrayStack(int = 100);

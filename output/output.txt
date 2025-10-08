@@ -1,0 +1,67 @@
+PS C:\Users\zack1\OneDrive\Documents\GitHub\week-8-mon-lab-zack1stplayer>  & 'c:\Users\zack1\.vscode\extensions\ms-vscode.cpptools-1.27.7-win32-x64\debugAdapters\bin\WindowsDebugLauncher.exe' '--stdin=Microsoft-MIEngine-In-l2yf4mvx.g13' '--stdout=Microsoft-MIEngine-Out-w21n4qvj.uto' '--stderr=Microsoft-MIEngine-Error-uno4dze4.c0w' '--pid=Microsoft-MIEngine-Pid-hb3tkga1.tjd' '--dbgExe=C:\msys64\ucrt64\bin\gdb.exe' '--interpreter=mi' 
+10
+4 44
+
+10 4 44
+3 33
+4 44
+22
+peek(): Stack is empty, could not peek top value
+pop(): Stack is empty, could not pop top value
+push(): Stack is full, could not push new value
+rotate(): Stack is empty, could not rotate
+44
+5 55
+top     100
+        99
+        88
+        77
+        66
+        55
+        44
+        33
+        22
+        11
+push(): Stack is full, could not push new value
+
+top     99
+        88
+        77
+        66
+        55
+        44
+        33
+        22
+        11
+        100
+
+top     11
+        100
+        99
+        88
+        77
+        66
+        55
+        44
+        33
+        22
+
+top     44
+        33
+        22
+        11
+
+top     11
+        44
+        33
+        22
+
+top     33
+        22
+        11
+        44
+
+Hello World
+Programmed to work and not to feel
+Not even sure that this is real
+Hello World

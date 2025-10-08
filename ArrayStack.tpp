@@ -1,6 +1,9 @@
+#include "ArrayStack.hpp"
+
 template <typename T>
-ArrayStack<T>::ArrayStack(int i) {
-    // TODO
+ArrayStack<T>::ArrayStack(int i) : Stack<T>::Stack() {
+    this->maxSize = i;
+    this->buffer = new T[this->maxSize];
 }
 
 template <typename T>
@@ -24,12 +27,22 @@ ArrayStack<T>::~ArrayStack() {
 
 template <typename T>
 void ArrayStack<T>::clear() {
-    // TODO
+    this->length = 0;
+    this->maxSize = 0;
+    if (this->buffer != nullptr) {
+        delete[] this->buffer;
+        this->buffer = nullptr;
+    }
 }
 
 template <typename T>
 void ArrayStack<T>::copy(const ArrayStack<T>& copyObj) {
-    // TODO
+    this->length = 0;
+    this->maxSize = copyObj.maxSize;
+    this->buffer = new T[this->maxSize];
+    while (this->length < copyObj.length) {
+        this->buffer[this->length++] = copyObj.buffer[this->length];
+    }
 }
 
 template <typename T>
@@ -54,22 +67,63 @@ bool ArrayStack<T>::isFull() const {
 
 template <typename T>
 T ArrayStack<T>::peek() const {
-    // TODO
+    if (isEmpty()) {
+        throw string("peek(): Stack is empty, could not peek top value");
+    }
+    return this->buffer[this->length - 1];
 }
 
 template <typename T>
 void ArrayStack<T>::pop() {
-    // TODO
+    if (isEmpty()) {
+        throw string("pop(): Stack is empty, could not pop top value");
+    }
+    this->buffer[--this->length] = T();
 }
 
 template <typename T>
 void ArrayStack<T>::push(const T& elem) {
-    // TODO
+    if (isFull()) {
+        throw string("push(): Stack is full, could not push new value");
+    }
+    this->buffer[this->length++] = elem;
 }
 
 template <typename T>
 void ArrayStack<T>::rotate(typename Stack<T>::Direction dir) {
-    // TODO
+    if (isEmpty()) {
+        throw string("rotate(): Stack is empty, could not rotate");
+    }
+    
+    switch (dir) {
+    case Stack<T>::LEFT:
+        rotateLeft();
+        break;
+    case Stack<T>::RIGHT:
+        rotateRight();
+        break;
+    
+    default:
+        break;
+    }
+}
+
+template <typename T>
+void ArrayStack<T>::rotateLeft() {
+    T tempVar = this->buffer[this->length - 1];
+    for (int i = (this->length - 1); i > 0; i--) {
+        this->buffer[i] = this->buffer[i - 1];
+    }
+    this->buffer[0] = tempVar;
+}
+
+template <typename T>
+void ArrayStack<T>::rotateRight() {
+    T tempVar = this->buffer[0];
+    for (int i = 0; i < (this->length - 1); i++) {
+        this->buffer[i] = this->buffer[i + 1];
+    }
+    this->buffer[this->length - 1] = tempVar;
 }
 
 template <typename T>
