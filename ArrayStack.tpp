@@ -28,7 +28,6 @@ ArrayStack<T>::~ArrayStack() {
 template <typename T>
 void ArrayStack<T>::clear() {
     this->length = 0;
-    this->maxSize = 0;
     if (this->buffer != nullptr) {
         delete[] this->buffer;
         this->buffer = nullptr;
@@ -85,6 +84,9 @@ template <typename T>
 void ArrayStack<T>::push(const T& elem) {
     if (isFull()) {
         throw string("push(): Stack is full, could not push new value");
+    }
+    if (this->buffer == nullptr) {
+        this->buffer = new T[this->maxSize];
     }
     this->buffer[this->length++] = elem;
 }
